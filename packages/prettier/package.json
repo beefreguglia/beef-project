@@ -5,6 +5,13 @@
   "private": true,
   "devDependencies": {
     "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.9"
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "@beef-project/eslint-config": "workspace:*" 
+  },
+  "prettier": "./index.mjs",
+  "eslintConfig": {
+    "extends": [
+      "@beef-project/eslint-config/react"
+    ]
   }
 }
