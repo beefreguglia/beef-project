@@ -12,7 +12,7 @@ importers:
         specifier: ^2.3.3
         version: 2.3.3
 
-  packages/eslint-config:
+  config/eslint-config:
     dependencies:
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.21.0
@@ -58,7 +58,7 @@ importers:
         specifier: workspace:*
         version: link:../prettier
 
-  packages/prettier:
+  config/prettier:
     devDependencies:
       '@beef-project/eslint-config':
         specifier: workspace:*
@@ -69,6 +69,20 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.6.9
         version: 0.6.9(prettier@3.4.2)
+
+  config/ts-config: {}
+
+  packages/auth:
+    devDependencies:
+      '@beef-project/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@beef-project/prettier':
+        specifier: workspace:*
+        version: link:../../config/prettier
+      '@beef-project/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
 
 packages:
 
