@@ -15,6 +15,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'no-useless-constructor': 0,
     'prettier/prettier': [
       'error',
       {
@@ -23,7 +24,8 @@ module.exports = {
         singleQuote: true,
         trailingComma: 'all',
         arrowParens: 'always',
-        semi: false,
+        semi: true,
+        endOfLine: 'auto',
       },
     ],
   },
