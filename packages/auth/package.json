@@ -1,0 +1,21 @@
+{
+  "name": "@beef-project/auth",
+  "version": "0.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "devDependencies": {
+    "@beef-project/eslint-config": "workspace:*",
+    "@beef-project/prettier": "workspace:*",
+    "@beef-project/ts-config": "workspace:*"
+  },
+  "prettier": "@beef-project/prettier",
+  "eslintConfig": {
+    "extends": [
+      "@beef-project/eslint-config/react"
+    ]
+  },
+  "dependencies": {
+    "@casl/ability": "^6.7.3"
+  }
+}
