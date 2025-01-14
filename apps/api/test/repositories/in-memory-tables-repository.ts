@@ -25,4 +25,10 @@ export class InMemoryTablesRepository implements TablesRepository {
 
     this.items.splice(itemIndex, 1);
   }
+
+  async save(table: Table): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.id === table.id);
+
+    this.items[itemIndex] = table;
+  }
 }
