@@ -19,4 +19,10 @@ export class InMemoryTablesRepository implements TablesRepository {
 
     return table;
   }
+
+  async delete(table: Table): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.id === table.id);
+
+    this.items.splice(itemIndex, 1);
+  }
 }

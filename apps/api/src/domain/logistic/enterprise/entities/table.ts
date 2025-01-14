@@ -1,7 +1,7 @@
 import { Entity } from '@/core/entities/entity';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
-type TableProps = {
+export type TableProps = {
   restaurantId: UniqueEntityID;
   reference: string;
   capacity: number;
