@@ -17,8 +17,9 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['jsx-a11y', '@typescript-eslint'],
+  plugins: ['jsx-a11y', '@typescript-eslint', 'simple-import-sort'],
   rules: {
+    'simple-import-sort/imports': 'error',
     'prettier/prettier': [
       'error',
       {

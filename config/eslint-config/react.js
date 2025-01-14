@@ -19,9 +19,10 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'jsx-a11y', '@typescript-eslint'],
+  plugins: ['react', 'jsx-a11y', '@typescript-eslint', 'simple-import-sort'],
   rules: {
     'react/self-closing-comp': 'error',
+    'simple-import-sort/imports': 'error',
     'prettier/prettier': [
       'error',
       {

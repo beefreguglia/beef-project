@@ -29,7 +29,8 @@
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "devDependencies": {
-    "@beef-project/prettier": "workspace:*"
+    "@beef-project/prettier": "workspace:*",
+    "eslint-plugin-simple-import-sort": "^12.1.1"
   },
   "prettier": "@beef-project/prettier",
   "eslintConfig": {
