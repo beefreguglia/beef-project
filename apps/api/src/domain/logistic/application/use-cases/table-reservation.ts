@@ -3,7 +3,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { Reservation } from '../../enterprise/entities/reservation';
 import { ReservationsRepository } from '../repositories/reservations-repository';
 
-type ReserveTableUseCaseRequest = {
+type TableReservationUseCaseRequest = {
   tableId: string;
   clientId: string;
   expiresIn: Date;
@@ -18,7 +18,7 @@ class TableReservationUseCase {
     tableId,
     date,
     expiresIn,
-  }: ReserveTableUseCaseRequest) {
+  }: TableReservationUseCaseRequest) {
     const reservation = Reservation.create({
       clientId: new UniqueEntityID(clientId),
       tableId: new UniqueEntityID(tableId),

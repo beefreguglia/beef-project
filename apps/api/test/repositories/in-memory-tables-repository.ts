@@ -9,4 +9,14 @@ export class InMemoryTablesRepository implements TablesRepository {
   async create(table: Table): Promise<void> {
     this.items.push(table);
   }
+
+  async findById(id: string): Promise<Table | null> {
+    const table = this.items.find((item) => item.id.toString() === id);
+
+    if (!table) {
+      return null;
+    }
+
+    return table;
+  }
 }
