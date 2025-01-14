@@ -1,5 +1,5 @@
 import { Table } from '../../enterprise/entities/table';
 
-export interface TableRepository {
+export interface TablesRepository {
   create(table: Table): Promise<void>;
 }

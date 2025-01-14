@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
 import { Reservation } from '../../enterprise/entities/reservation';
-import { ReservationRepository } from '../repositories/reservation-repository';
+import { ReservationsRepository } from '../repositories/reservations-repository';
 
 type ReserveTableUseCaseRequest = {
   tableId: string;
@@ -10,8 +10,8 @@ type ReserveTableUseCaseRequest = {
   date: Date;
 };
 
-class ReserveTableUseCase {
-  constructor(private reservationRepository: ReservationRepository) {}
+class TableReservationUseCase {
+  constructor(private reservationsRepository: ReservationsRepository) {}
 
   async execute({
     clientId,
@@ -26,10 +26,10 @@ class ReserveTableUseCase {
       date,
     });
 
-    await this.reservationRepository.create(reservation);
+    await this.reservationsRepository.create(reservation);
 
     return reservation;
   }
 }
 
-export { ReserveTableUseCase };
+export { TableReservationUseCase };

@@ -1,34 +1,33 @@
+import { InMemoryReservationsRepository } from 'test/repositories/in-memory-reservations-repository';
+
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
-import { Reservation } from '../../enterprise/entities/reservation';
-import { ReservationRepository } from '../repositories/reservation-repository';
-import { ReserveTableUseCase } from './table-reservation';
+import { TableReservationUseCase } from './table-reservation';
 
-const fakeReservationRepository: ReservationRepository = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  create: async (reservation: Reservation) => {
-    return;
-  },
-};
+let inMemoryReservationsRepository: InMemoryReservationsRepository;
+let sut: TableReservationUseCase;
 
-test('create a reservation', async () => {
-  const reservationTableUseCase = new ReserveTableUseCase(
-    fakeReservationRepository,
-  );
-
-  const reservation = await reservationTableUseCase.execute({
-    clientId: '1',
-    tableId: '1',
-    date: new Date(),
-    expiresIn: new Date(),
+describe('Create Table', () => {
+  beforeEach(() => {
+    inMemoryReservationsRepository = new InMemoryReservationsRepository();
+    sut = new TableReservationUseCase(inMemoryReservationsRepository);
   });
 
-  expect(reservation).toEqual(
-    expect.objectContaining({
-      clientId: expect.any(UniqueEntityID),
-      tableId: expect.any(UniqueEntityID),
-      date: expect.any(Date),
-      expiresIn: expect.any(Date),
-    }),
-  );
+  it('should be able to create a table', async () => {
+    const reservation = await sut.execute({
+      clientId: '1',
+      tableId: '1',
+      date: new Date(),
+      expiresIn: new Date(),
+    });
+
+    expect(reservation).toEqual(
+      expect.objectContaining({
+        clientId: expect.any(UniqueEntityID),
+        tableId: expect.any(UniqueEntityID),
+        date: expect.any(Date),
+        expiresIn: expect.any(Date),
+      }),
+    );
+  });
 });

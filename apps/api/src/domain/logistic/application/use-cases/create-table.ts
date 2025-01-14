@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
 import { Table } from '../../enterprise/entities/table';
-import { TableRepository } from '../repositories/table-repository';
+import { TablesRepository } from '../repositories/tables-repository';
 
 type CreateTableUseCaseRequest = {
   restaurantId: string;
@@ -14,7 +14,7 @@ type CreateTableUseCaseResponse = {
 };
 
 class CreateTableUseCase {
-  constructor(private tableRepository: TableRepository) {}
+  constructor(private tableRepository: TablesRepository) {}
 
   async execute({
     capacity,

@@ -1,5 +1,5 @@
 import { Reservation } from '../../enterprise/entities/reservation';
 
-export interface ReservationRepository {
+export interface ReservationsRepository {
   create(reservation: Reservation): Promise<void>;
 }

@@ -41,7 +41,7 @@ class Restaurant extends Entity<RestaurantProps> {
     this.props.ownerId = ownerId;
   }
 
-  static create(props: Optional<RestaurantProps, 'slug'>, id: UniqueEntityID) {
+  static create(props: Optional<RestaurantProps, 'slug'>, id?: UniqueEntityID) {
     const restaurant = new Restaurant(
       { ...props, slug: props.slug ?? Slug.createFromText(props.name) },
       id,

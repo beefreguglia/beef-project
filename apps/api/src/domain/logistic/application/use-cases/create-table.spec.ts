@@ -1,30 +1,33 @@
+import { InMemoryTablesRepository } from 'test/repositories/in-memory-tables-repository';
+
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
-import { Table } from '../../enterprise/entities/table';
-import { TableRepository } from '../repositories/table-repository';
 import { CreateTableUseCase } from './create-table';
 
-const fakeTableRepository: TableRepository = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  create: async (table: Table) => {
-    return;
-  },
-};
+let inMemoryTablesRepository: InMemoryTablesRepository;
+let sut: CreateTableUseCase;
 
-test('create a table', async () => {
-  const createTableUseCase = new CreateTableUseCase(fakeTableRepository);
-
-  const { table } = await createTableUseCase.execute({
-    capacity: 4,
-    reference: 'A1',
-    restaurantId: '1',
+describe('Create Table', () => {
+  beforeEach(() => {
+    inMemoryTablesRepository = new InMemoryTablesRepository();
+    sut = new CreateTableUseCase(inMemoryTablesRepository);
   });
 
-  expect(table).toEqual(
-    expect.objectContaining({
+  it('should be able to create a table', async () => {
+    const { table } = await sut.execute({
       capacity: 4,
       reference: 'A1',
-      restaurantId: expect.any(UniqueEntityID),
-    }),
-  );
+      restaurantId: '1',
+    });
+
+    expect(table).toEqual(
+      expect.objectContaining({
+        capacity: 4,
+        reference: 'A1',
+        restaurantId: expect.any(UniqueEntityID),
+      }),
+    );
+
+    expect(inMemoryTablesRepository.items[0].id).toEqual(table.id);
+  });
 });

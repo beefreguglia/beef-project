@@ -40,7 +40,10 @@ class Client extends Entity<ClientProps> {
     this.props.updatedAt = new Date();
   }
 
-  static create(props: Optional<ClientProps, 'createdAt'>, id: UniqueEntityID) {
+  static create(
+    props: Optional<ClientProps, 'createdAt'>,
+    id?: UniqueEntityID,
+  ) {
     const client = new Client(
       {
         ...props,
