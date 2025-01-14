@@ -1,4 +1,14 @@
 {
   "extends": "@beef-project/ts-config/library.json",
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": [
+      "vitest/globals"
+    ],
+  },
+  
 }

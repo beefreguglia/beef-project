@@ -1,12 +1,14 @@
 {
   "name": "@beef-project/api",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@beef-project/auth": "workspace:*"
+    "@beef-project/auth": "workspace:*",
+    "dayjs": "^1.11.13"
   },
   "devDependencies": {
     "@beef-project/eslint-config": "workspace:*",
