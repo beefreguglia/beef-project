@@ -1,11 +1,11 @@
 import { Entity } from '@/core/entities/entity';
-import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Optional } from '@/core/types/optional';
 
 import { Slug } from './value-objects/slug';
 
 type RestaurantProps = {
-  ownerId: UniqueEntityID;
+  ownerId: UniqueEntityId;
   name: string;
   description: string;
   slug: Slug;
@@ -41,7 +41,7 @@ class Restaurant extends Entity<RestaurantProps> {
     this.touch();
   }
 
-  set ownerId(ownerId: UniqueEntityID) {
+  set ownerId(ownerId: UniqueEntityId) {
     this.props.ownerId = ownerId;
     this.touch();
   }
@@ -50,7 +50,7 @@ class Restaurant extends Entity<RestaurantProps> {
     this.props.updatedAt = new Date();
   }
 
-  static create(props: Optional<RestaurantProps, 'slug'>, id?: UniqueEntityID) {
+  static create(props: Optional<RestaurantProps, 'slug'>, id?: UniqueEntityId) {
     const restaurant = new Restaurant(
       {
         ...props,

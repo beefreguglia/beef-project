@@ -1,10 +1,10 @@
 import { Entity } from '@/core/entities/entity';
-import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Optional } from '@/core/types/optional';
 
 type ReservationProps = {
-  clientId: UniqueEntityID;
-  tableId: UniqueEntityID;
+  clientId: UniqueEntityId;
+  tableId: UniqueEntityId;
   date: Date;
   expiresIn: Date;
   createdAt: Date;
@@ -46,12 +46,12 @@ class Reservation extends Entity<ReservationProps> {
     this.touch();
   }
 
-  set clientId(clientId: UniqueEntityID) {
+  set clientId(clientId: UniqueEntityId) {
     this.props.clientId = clientId;
     this.touch();
   }
 
-  set tableId(tableId: UniqueEntityID) {
+  set tableId(tableId: UniqueEntityId) {
     this.props.tableId = tableId;
     this.touch();
   }
@@ -62,7 +62,7 @@ class Reservation extends Entity<ReservationProps> {
 
   static create(
     props: Optional<ReservationProps, 'createdAt' | 'expiresIn'>,
-    id?: UniqueEntityID,
+    id?: UniqueEntityId,
   ) {
     const reservation = new Reservation(
       {

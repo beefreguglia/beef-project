@@ -1,9 +1,9 @@
 import { Entity } from '@/core/entities/entity';
-import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Optional } from '@/core/types/optional';
 
 type ClientProps = {
-  restaurantId: UniqueEntityID;
+  restaurantId: UniqueEntityId;
   name: string;
   createdAt: Date;
   updatedAt?: Date | null;
@@ -26,7 +26,7 @@ class Client extends Entity<ClientProps> {
     return this.props.updatedAt ?? null;
   }
 
-  set restaurantId(id: UniqueEntityID) {
+  set restaurantId(id: UniqueEntityId) {
     this.restaurantId = id;
     this.touch();
   }
@@ -42,7 +42,7 @@ class Client extends Entity<ClientProps> {
 
   static create(
     props: Optional<ClientProps, 'createdAt'>,
-    id?: UniqueEntityID,
+    id?: UniqueEntityId,
   ) {
     const client = new Client(
       {

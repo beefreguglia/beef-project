@@ -1,9 +1,9 @@
 import { Entity } from '@/core/entities/entity';
-import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Optional } from '@/core/types/optional';
 
 export type TableProps = {
-  restaurantId: UniqueEntityID;
+  restaurantId: UniqueEntityId;
   reference: string;
   capacity: number;
   createdAt: Date;
@@ -41,7 +41,7 @@ class Table extends Entity<TableProps> {
     this.touch();
   }
 
-  set restaurantId(restaurantId: UniqueEntityID) {
+  set restaurantId(restaurantId: UniqueEntityId) {
     this.props.restaurantId = restaurantId;
     this.touch();
   }
@@ -50,7 +50,7 @@ class Table extends Entity<TableProps> {
     this.props.updatedAt = new Date();
   }
 
-  static create(props: Optional<TableProps, 'createdAt'>, id?: UniqueEntityID) {
+  static create(props: Optional<TableProps, 'createdAt'>, id?: UniqueEntityId) {
     const reservation = new Table(
       {
         ...props,

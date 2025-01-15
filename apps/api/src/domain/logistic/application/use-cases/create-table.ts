@@ -1,5 +1,5 @@
 import { Either, right } from '@/core/either';
-import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
 import { Table } from '../../enterprise/entities/table';
 import { TablesRepository } from '../repositories/tables-repository';
@@ -28,7 +28,7 @@ class CreateTableUseCase {
     const table = Table.create({
       capacity,
       reference,
-      restaurantId: new UniqueEntityID(restaurantId),
+      restaurantId: new UniqueEntityId(restaurantId),
     });
 
     await this.tableRepository.create(table);

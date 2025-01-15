@@ -1,5 +1,5 @@
 import { Either, right } from '@/core/either';
-import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
 import { Client } from '../../enterprise/entities/client';
 import { ClientsRepository } from '../repositories/clients-repository';
@@ -25,7 +25,7 @@ class CreateClientUseCase {
   }: CreateClientUseCaseRequest): Promise<CreateClientUseCaseResponse> {
     const client = Client.create({
       name,
-      restaurantId: new UniqueEntityID(restaurantId),
+      restaurantId: new UniqueEntityId(restaurantId),
     });
 
     await this.clientRepository.create(client);
