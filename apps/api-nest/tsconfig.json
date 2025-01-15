@@ -1,0 +1,11 @@
+{
+  "extends": "@beef-project/ts-config/nest.json",
+  "include": ["src/**/*", "test/**/*"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+  },
+  
+}
