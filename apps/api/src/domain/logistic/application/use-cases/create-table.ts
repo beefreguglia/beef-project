@@ -11,7 +11,7 @@ type CreateTableUseCaseRequest = {
 };
 
 type CreateTableUseCaseResponse = Either<
-  {},
+  null,
   {
     table: Table;
   }

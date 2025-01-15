@@ -50,7 +50,10 @@ class Restaurant extends Entity<RestaurantProps> {
     this.props.updatedAt = new Date();
   }
 
-  static create(props: Optional<RestaurantProps, 'slug'>, id?: UniqueEntityId) {
+  static create(
+    props: Optional<RestaurantProps, 'slug' | 'createdAt'>,
+    id?: UniqueEntityId,
+  ) {
     const restaurant = new Restaurant(
       {
         ...props,

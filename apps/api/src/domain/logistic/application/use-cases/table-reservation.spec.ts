@@ -11,7 +11,7 @@ describe('Table reservation', () => {
     sut = new TableReservationUseCase(inMemoryReservationsRepository);
   });
 
-  it('should be able to create a table', async () => {
+  it('should be able to reserve a table', async () => {
     const result = await sut.execute({
       clientId: '1',
       tableId: '1',

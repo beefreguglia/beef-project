@@ -12,7 +12,7 @@ type TableReservationUseCaseRequest = {
 };
 
 type TableReservationUseCaseResponse = Either<
-  {},
+  null,
   {
     reservation: Reservation;
   }

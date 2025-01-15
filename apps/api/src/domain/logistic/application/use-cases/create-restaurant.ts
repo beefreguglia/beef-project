@@ -11,7 +11,7 @@ type CreateRestaurantUseCaseRequest = {
 };
 
 type CreateRestaurantUseCaseResponse = Either<
-  {},
+  null,
   {
     restaurant: Restaurant;
   }
