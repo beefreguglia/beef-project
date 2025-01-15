@@ -18,6 +18,9 @@ module.exports = {
     'no-useless-constructor': 0,
     'no-useless-return': 0,
     'simple-import-sort/imports': 'error',
+    'no-unused-vars': 'off',
+    'no-new': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
     'prettier/prettier': [
       'error',
       {
@@ -28,6 +31,15 @@ module.exports = {
         arrowParens: 'always',
         semi: true,
         endOfLine: 'auto',
+      },
+    ],
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        extendDefaults: true,
+        types: {
+          '{}': false,
+        },
       },
     ],
   },
