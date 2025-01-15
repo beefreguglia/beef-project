@@ -1,3 +1,4 @@
+import { Either, right } from '@/core/either';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
 import { Client } from '../../enterprise/entities/client';
@@ -8,9 +9,12 @@ type CreateClientUseCaseRequest = {
   restaurantId: string;
 };
 
-type CreateClientUseCaseResponse = {
-  client: Client;
-};
+type CreateClientUseCaseResponse = Either<
+  {},
+  {
+    client: Client;
+  }
+>;
 
 class CreateClientUseCase {
   constructor(private clientRepository: ClientsRepository) {}
@@ -26,7 +30,7 @@ class CreateClientUseCase {
 
     await this.clientRepository.create(client);
 
-    return { client };
+    return right({ client });
   }
 }
 

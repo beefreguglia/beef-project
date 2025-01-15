@@ -17,12 +17,13 @@ describe('Edit Table', () => {
 
     await inMemoryTablesRepository.create(table);
 
-    await sut.execute({
+    const result = await sut.execute({
       tableId: table.id.toString(),
       capacity: 2,
       reference: 'Updated',
     });
 
+    expect(result.isRight()).toBe(true);
     expect(inMemoryTablesRepository.items[0]).toMatchObject({
       capacity: 2,
       reference: 'Updated',

@@ -67,8 +67,8 @@ class Reservation extends Entity<ReservationProps> {
     const reservation = new Reservation(
       {
         ...props,
-        createdAt: new Date(),
-        expiresIn: new Date(),
+        createdAt: props.createdAt ?? new Date(),
+        expiresIn: props.expiresIn ?? new Date(),
       },
       id,
     );

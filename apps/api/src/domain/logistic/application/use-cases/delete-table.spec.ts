@@ -17,10 +17,11 @@ describe('Delete Table', () => {
 
     await inMemoryTablesRepository.create(table);
 
-    await sut.execute({
+    const result = await sut.execute({
       tableId: table.id.toString(),
     });
 
     expect(inMemoryTablesRepository.items).toHaveLength(0);
+    expect(result.isRight()).toBe(true);
   });
 });

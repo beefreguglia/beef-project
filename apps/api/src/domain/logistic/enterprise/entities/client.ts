@@ -47,7 +47,7 @@ class Client extends Entity<ClientProps> {
     const client = new Client(
       {
         ...props,
-        createdAt: new Date(),
+        createdAt: props.createdAt ?? new Date(),
       },
       id,
     );

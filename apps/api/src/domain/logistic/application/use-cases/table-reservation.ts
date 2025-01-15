@@ -1,3 +1,4 @@
+import { Either, right } from '@/core/either';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
 import { Reservation } from '../../enterprise/entities/reservation';
@@ -10,6 +11,13 @@ type TableReservationUseCaseRequest = {
   date: Date;
 };
 
+type TableReservationUseCaseResponse = Either<
+  {},
+  {
+    reservation: Reservation;
+  }
+>;
+
 class TableReservationUseCase {
   constructor(private reservationsRepository: ReservationsRepository) {}
 
@@ -18,7 +26,7 @@ class TableReservationUseCase {
     tableId,
     date,
     expiresIn,
-  }: TableReservationUseCaseRequest) {
+  }: TableReservationUseCaseRequest): Promise<TableReservationUseCaseResponse> {
     const reservation = Reservation.create({
       clientId: new UniqueEntityID(clientId),
       tableId: new UniqueEntityID(tableId),
@@ -28,7 +36,7 @@ class TableReservationUseCase {
 
     await this.reservationsRepository.create(reservation);
 
-    return reservation;
+    return right({ reservation });
   }
 }
 

@@ -1,5 +1,8 @@
+import { Either, left, right } from '@/core/either';
+
 import { Table } from '../../enterprise/entities/table';
 import { TablesRepository } from '../repositories/tables-repository';
+import { ResourceNotFoundError } from './errors/resource-not-found-error';
 
 type EditTableUseCaseRequest = {
   tableId: string;
@@ -7,9 +10,12 @@ type EditTableUseCaseRequest = {
   reference: string;
 };
 
-type EditTableUseCaseResponse = {
-  table: Table;
-};
+type EditTableUseCaseResponse = Either<
+  ResourceNotFoundError,
+  {
+    table: Table;
+  }
+>;
 
 class EditTableUseCase {
   constructor(private tableRepository: TablesRepository) {}
@@ -20,8 +26,9 @@ class EditTableUseCase {
     reference,
   }: EditTableUseCaseRequest): Promise<EditTableUseCaseResponse> {
     const table = await this.tableRepository.findById(tableId);
+
     if (!table) {
-      throw new Error('Table not found.');
+      return left(new ResourceNotFoundError());
     }
 
     table.capacity = capacity;
@@ -29,7 +36,7 @@ class EditTableUseCase {
 
     await this.tableRepository.save(table);
 
-    return { table };
+    return right({ table });
   }
 }
 

@@ -17,11 +17,14 @@ describe('Get table by id', () => {
 
     await inMemoryTablesRepository.create(createdTable);
 
-    const { table } = await sut.execute({
+    const result = await sut.execute({
       tableId: createdTable.id.toString(),
     });
 
-    expect(table.id).toBeTruthy();
-    expect(table.reference).toEqual(createdTable.reference);
+    expect(result.isRight()).toBe(true);
+    if (result.isRight()) {
+      expect(result.value.table.id).toBeTruthy();
+      expect(result.value.table.reference).toEqual(createdTable.reference);
+    }
   });
 });

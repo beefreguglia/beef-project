@@ -12,20 +12,18 @@ describe('Create Restaurant', () => {
   });
 
   it('should be able to create a restaurant', async () => {
-    const { restaurant } = await sut.execute({
+    const result = await sut.execute({
       name: 'Restaurant name',
       description: 'Description',
       ownerId: '1',
     });
 
-    expect(restaurant).toEqual(
-      expect.objectContaining({
-        name: 'Restaurant name',
-        description: 'Description',
-        ownerId: restaurant.ownerId,
-      }),
-    );
+    expect(result.isRight()).toBe(true);
 
-    expect(inMemoryRestaurantsRepository.items[0].id).toEqual(restaurant.id);
+    if (result.isRight()) {
+      expect(inMemoryRestaurantsRepository.items[0]).toEqual(
+        result.value.restaurant,
+      );
+    }
   });
 });

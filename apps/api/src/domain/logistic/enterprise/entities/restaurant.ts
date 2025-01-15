@@ -9,6 +9,8 @@ type RestaurantProps = {
   name: string;
   description: string;
   slug: Slug;
+  createdAt: Date;
+  updatedAt?: Date;
 };
 
 class Restaurant extends Entity<RestaurantProps> {
@@ -31,19 +33,30 @@ class Restaurant extends Entity<RestaurantProps> {
   set name(name: string) {
     this.props.name = name;
     this.props.slug = Slug.createFromText(name);
+    this.touch();
   }
 
   set description(description: string) {
     this.props.description = description;
+    this.touch();
   }
 
   set ownerId(ownerId: UniqueEntityID) {
     this.props.ownerId = ownerId;
+    this.touch();
+  }
+
+  private touch() {
+    this.props.updatedAt = new Date();
   }
 
   static create(props: Optional<RestaurantProps, 'slug'>, id?: UniqueEntityID) {
     const restaurant = new Restaurant(
-      { ...props, slug: props.slug ?? Slug.createFromText(props.name) },
+      {
+        ...props,
+        createdAt: props.createdAt ?? new Date(),
+        slug: props.slug ?? Slug.createFromText(props.name),
+      },
       id,
     );
 

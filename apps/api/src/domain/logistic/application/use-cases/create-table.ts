@@ -1,3 +1,4 @@
+import { Either, right } from '@/core/either';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
 import { Table } from '../../enterprise/entities/table';
@@ -9,9 +10,12 @@ type CreateTableUseCaseRequest = {
   capacity: number;
 };
 
-type CreateTableUseCaseResponse = {
-  table: Table;
-};
+type CreateTableUseCaseResponse = Either<
+  {},
+  {
+    table: Table;
+  }
+>;
 
 class CreateTableUseCase {
   constructor(private tableRepository: TablesRepository) {}
@@ -29,7 +33,7 @@ class CreateTableUseCase {
 
     await this.tableRepository.create(table);
 
-    return { table };
+    return right({ table });
   }
 }
 

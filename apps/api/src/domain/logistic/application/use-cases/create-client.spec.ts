@@ -12,18 +12,15 @@ describe('Create Client', () => {
   });
 
   it('should be able to create a client', async () => {
-    const { client } = await sut.execute({
+    const result = await sut.execute({
       name: 'Client name',
       restaurantId: '1',
     });
 
-    expect(client).toEqual(
-      expect.objectContaining({
-        name: 'Client name',
-        restaurantId: client.restaurantId,
-      }),
-    );
+    expect(result.isRight()).toBe(true);
 
-    expect(inMemoryClientsRepository.items[0].id).toEqual(client.id);
+    if (result.isRight()) {
+      expect(inMemoryClientsRepository.items[0]).toEqual(result.value?.client);
+    }
   });
 });

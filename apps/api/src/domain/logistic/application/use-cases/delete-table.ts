@@ -1,24 +1,29 @@
+import { Either, left, right } from '@/core/either';
+
 import { TablesRepository } from '../repositories/tables-repository';
+import { ResourceNotFoundError } from './errors/resource-not-found-error';
 
 type DeleteTableUseCaseRequest = {
   tableId: string;
 };
 
-// type DeleteTableUseCaseResponse = {};
+type DeleteTableUseCaseResponse = Either<ResourceNotFoundError, {}>;
 
 class DeleteTableUseCase {
   constructor(private tableRepository: TablesRepository) {}
 
-  async execute({ tableId }: DeleteTableUseCaseRequest) {
+  async execute({
+    tableId,
+  }: DeleteTableUseCaseRequest): Promise<DeleteTableUseCaseResponse> {
     const table = await this.tableRepository.findById(tableId);
 
     if (!table) {
-      throw new Error('Table not found');
+      return left(new ResourceNotFoundError());
     }
 
     await this.tableRepository.delete(table);
 
-    return {};
+    return right({});
   }
 }
 

@@ -1,13 +1,19 @@
+import { Either, left, right } from '@/core/either';
+
 import { Table } from '../../enterprise/entities/table';
 import { TablesRepository } from '../repositories/tables-repository';
+import { ResourceNotFoundError } from './errors/resource-not-found-error';
 
 type GetTableByIdUseCaseRequest = {
   tableId: string;
 };
 
-type GetTableByIdUseCaseResponse = {
-  table: Table;
-};
+type GetTableByIdUseCaseResponse = Either<
+  ResourceNotFoundError,
+  {
+    table: Table;
+  }
+>;
 
 class GetTableByIdUseCase {
   constructor(private tablesRepository: TablesRepository) {}
@@ -18,10 +24,10 @@ class GetTableByIdUseCase {
     const table = await this.tablesRepository.findById(tableId);
 
     if (!table) {
-      throw new Error('Table not found');
+      return left(new ResourceNotFoundError());
     }
 
-    return { table };
+    return right({ table });
   }
 }
 
