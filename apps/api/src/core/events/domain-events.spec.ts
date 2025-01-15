@@ -4,7 +4,7 @@ import { DomainEvents } from '@/core/events/domain-events';
 
 import { AggregateRoot } from '../entities/aggregate-root';
 import { UniqueEntityId } from '../entities/unique-entity-id';
-import { DomainEvent } from '../events/domain-event';
+import { DomainEvent } from './domain-event';
 
 class CustomAggregateCreated implements DomainEvent {
   public occurredAt: Date;

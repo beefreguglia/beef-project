@@ -1,5 +1,5 @@
 {
-  "extends": "@beef-project/ts-config/library.json",
+  "extends": "@beef-project/ts-config/nest.json",
   "include": ["src/**/*", "test/**/*"],
   "compilerOptions": {
     "baseUrl": "./",
@@ -7,8 +7,8 @@
       "@/*": ["./src/*"]
     },
     "types": [
-      "vitest/globals"
-    ],
+      "vitest/globals",
+    ]
   },
   
 }
