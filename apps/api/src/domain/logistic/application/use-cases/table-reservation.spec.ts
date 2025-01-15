@@ -1,14 +1,15 @@
-import { InMemoryReservationsRepository } from 'test/repositories/in-memory-reservations-repository';
+import { InMemoryTableReservationsRepository } from 'test/repositories/in-memory-table-reservations-repository';
 
 import { TableReservationUseCase } from './table-reservation';
 
-let inMemoryReservationsRepository: InMemoryReservationsRepository;
+let inMemoryTableReservationsRepository: InMemoryTableReservationsRepository;
 let sut: TableReservationUseCase;
 
 describe('Table reservation', () => {
   beforeEach(() => {
-    inMemoryReservationsRepository = new InMemoryReservationsRepository();
-    sut = new TableReservationUseCase(inMemoryReservationsRepository);
+    inMemoryTableReservationsRepository =
+      new InMemoryTableReservationsRepository();
+    sut = new TableReservationUseCase(inMemoryTableReservationsRepository);
   });
 
   it('should be able to reserve a table', async () => {
@@ -22,8 +23,8 @@ describe('Table reservation', () => {
     expect(result.isRight()).toBe(true);
 
     if (result.isRight()) {
-      expect(inMemoryReservationsRepository.items[0]).toEqual(
-        result.value.reservation,
+      expect(inMemoryTableReservationsRepository.items[0]).toEqual(
+        result.value.tableReservation,
       );
     }
   });

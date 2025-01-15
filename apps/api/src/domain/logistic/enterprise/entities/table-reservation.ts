@@ -1,8 +1,10 @@
-import { Entity } from '@/core/entities/entity';
+import { AggregateRoot } from '@/core/entities/aggregate-root';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 import { Optional } from '@/core/types/optional';
 
-type ReservationProps = {
+import { TableReservationCreatedEvent } from '../events/table-reservation-created-event';
+
+export type TableReservationProps = {
   clientId: UniqueEntityId;
   tableId: UniqueEntityId;
   date: Date;
@@ -11,7 +13,7 @@ type ReservationProps = {
   updatedAt?: Date;
 };
 
-class Reservation extends Entity<ReservationProps> {
+class TableReservation extends AggregateRoot<TableReservationProps> {
   get date() {
     return this.props.date;
   }
@@ -61,10 +63,10 @@ class Reservation extends Entity<ReservationProps> {
   }
 
   static create(
-    props: Optional<ReservationProps, 'createdAt' | 'expiresIn'>,
+    props: Optional<TableReservationProps, 'createdAt' | 'expiresIn'>,
     id?: UniqueEntityId,
   ) {
-    const reservation = new Reservation(
+    const tableReservation = new TableReservation(
       {
         ...props,
         createdAt: props.createdAt ?? new Date(),
@@ -73,8 +75,16 @@ class Reservation extends Entity<ReservationProps> {
       id,
     );
 
-    return reservation;
+    const isNewReservation = !id;
+
+    if (isNewReservation) {
+      tableReservation.addDomainEvent(
+        new TableReservationCreatedEvent(tableReservation),
+      );
+    }
+
+    return tableReservation;
   }
 }
 
-export { Reservation };
+export { TableReservation };

@@ -1,8 +1,8 @@
 import { Either, right } from '@/core/either';
 import { UniqueEntityId } from '@/core/entities/unique-entity-id';
 
-import { Reservation } from '../../enterprise/entities/reservation';
-import { ReservationsRepository } from '../repositories/reservations-repository';
+import { TableReservation } from '../../enterprise/entities/table-reservation';
+import { TableReservationsRepository } from '../repositories/table-reservations-repository';
 
 type TableReservationUseCaseRequest = {
   tableId: string;
@@ -14,12 +14,14 @@ type TableReservationUseCaseRequest = {
 type TableReservationUseCaseResponse = Either<
   null,
   {
-    reservation: Reservation;
+    tableReservation: TableReservation;
   }
 >;
 
 class TableReservationUseCase {
-  constructor(private reservationsRepository: ReservationsRepository) {}
+  constructor(
+    private tableReservationsRepository: TableReservationsRepository,
+  ) {}
 
   async execute({
     clientId,
@@ -27,16 +29,16 @@ class TableReservationUseCase {
     date,
     expiresIn,
   }: TableReservationUseCaseRequest): Promise<TableReservationUseCaseResponse> {
-    const reservation = Reservation.create({
+    const tableReservation = TableReservation.create({
       clientId: new UniqueEntityId(clientId),
       tableId: new UniqueEntityId(tableId),
       expiresIn,
       date,
     });
 
-    await this.reservationsRepository.create(reservation);
+    await this.tableReservationsRepository.create(tableReservation);
 
-    return right({ reservation });
+    return right({ tableReservation });
   }
 }
 

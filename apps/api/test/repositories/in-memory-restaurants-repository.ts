@@ -9,4 +9,14 @@ export class InMemoryRestaurantsRepository implements RestaurantsRepository {
   async create(restaurant: Restaurant): Promise<void> {
     this.items.push(restaurant);
   }
+
+  async findById(id: string): Promise<Restaurant | null> {
+    const restaurant = this.items.find((item) => item.id.toString() === id);
+
+    if (!restaurant) {
+      return null;
+    }
+
+    return restaurant;
+  }
 }

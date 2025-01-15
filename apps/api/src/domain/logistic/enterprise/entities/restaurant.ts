@@ -4,7 +4,7 @@ import { Optional } from '@/core/types/optional';
 
 import { Slug } from './value-objects/slug';
 
-type RestaurantProps = {
+export type RestaurantProps = {
   ownerId: UniqueEntityId;
   name: string;
   description: string;
