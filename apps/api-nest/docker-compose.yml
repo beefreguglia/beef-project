@@ -1,13 +1,13 @@
 services:
   postgres:
-    container_name: beef-pg
+    container_name: beef-project-db
     image: "bitnami/postgresql:latest"
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: beef-pg
+      POSTGRES_DB: beef-project-db
     volumes:
       - ./data/pg:/var/lib/postgresql/data
     
